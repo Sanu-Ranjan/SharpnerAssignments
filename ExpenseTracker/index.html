@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Expense Tracker</h1>
-    <form id="expense">
+    <form id="expenseForm">
       <label> Enter Expense Amount: <input id="amount" type="text" /> </label>
       <label> Enter Description: <input id="description" type="text" /></label>
       <label
@@ -22,8 +22,12 @@
           <option value="Clothes">Clothes</option>
         </select></label
       >
-      <button type="submit">Add Expense</button>
+      <button id="addExpense" type="submit">Add Expense</button>
     </form>
+    <br />
+    <br />
+    <h2>Your Expenses</h2>
+    <ul id="entries"></ul>
     <script defer src="./index.js"></script>
   </body>
 </html>
