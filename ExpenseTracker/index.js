@@ -22,24 +22,28 @@ document.getElementById("expenseForm").addEventListener("submit", (event) => {
   let deleteBtn = document.createElement("button");
   deleteBtn.className = "deleteEntry";
   deleteBtn.textContent = "Delete Entry";
+  deleteBtn.addEventListener("click", (event) => {
+    event.target.parentElement.remove();
+  });
 
   let editBtn = document.createElement("button");
   editBtn.className = "editEntry";
   editBtn.textContent = "Edit Expense";
+  editBtn.addEventListener("click", (event) => {
+    let [amt, category, description] =
+      event.target.parentElement.firstChild.textContent.split("-");
+
+    document.getElementById("amount").value = amt;
+    document.getElementById("description").value = description;
+    document.getElementById("category").value = category.trim();
+    event.target.parentElement.remove();
+  });
 
   listItem.appendChild(deleteBtn);
   listItem.appendChild(editBtn);
 
   document.getElementById("entries").append(listItem);
-});
-
-document.getElementById("entries").addEventListener("click", (event) => {
-  if (event.target.className == "editEntry") {
-    let info = event.target.parentElement.firstChild.textContent.split("-");
-
-    document.getElementById("amount").value = info[0];
-    document.getElementById("description").value = info[2];
-    document.getElementById("category").value = info[1].trim();
-  }
-  event.target.parentElement.remove();
+  document.getElementById("amount").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("category").value = "Food";
 });
