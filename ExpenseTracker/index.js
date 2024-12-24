@@ -10,15 +10,20 @@ class Expense {
 document.getElementById("expenseForm").addEventListener("submit", (event) => {
   event.preventDefault();
   let entry = new Expense(
-    event.target.amount,
-    event.target.description,
-    event.target.category
+    event.target.amount.value,
+    event.target.description.value,
+    event.target.category.value
   );
-
   let listItem = document.createElement("li");
-  listItem.textContent = `${entry.amount} - ${entry.category} - ${entry.description} `;
+  listItem.className = "expenseList";
+  listItem.textContent = ` ${entry.amount} - ${entry.category} - ${entry.description} `;
   let deleteBtn = document.createElement("button");
+  deleteBtn.className = "deleteEntry";
   deleteBtn.textContent = "Delete Entry";
   let editBtn = document.createElement("button");
+  editBtn.className = "editEntry";
   editBtn.textContent = "Edit Expense";
+  listItem.appendChild(deleteBtn);
+  listItem.appendChild(editBtn);
+  document.getElementById("entries").append(listItem);
 });
