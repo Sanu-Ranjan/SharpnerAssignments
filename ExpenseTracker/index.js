@@ -34,6 +34,9 @@ document.getElementById("expenseForm").addEventListener("submit", (event) => {
 });
 
 document.getElementById("entries").addEventListener("click", (event) => {
-  console.log(event.target);
+  console.log(event.target.className);
   event.target.parentElement.remove();
+  if (event.target.className == "editEntry") {
+    console.log("edit used");
+  }
 });
