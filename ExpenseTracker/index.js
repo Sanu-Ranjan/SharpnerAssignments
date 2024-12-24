@@ -35,8 +35,15 @@ document.getElementById("expenseForm").addEventListener("submit", (event) => {
 
 document.getElementById("entries").addEventListener("click", (event) => {
   console.log(event.target.className);
-  event.target.parentElement.remove();
+
   if (event.target.className == "editEntry") {
     console.log("edit used");
+    console.log(event.target.parentElement);
+    let info = event.target.parentElement.firstChild.textContent.split("-");
+    console.log(info);
+    document.getElementById("amount").value = info[0];
+    document.getElementById("description").value = info[2];
+    document.getElementById("category").value = info[1].trim();
   }
+  event.target.parentElement.remove();
 });
