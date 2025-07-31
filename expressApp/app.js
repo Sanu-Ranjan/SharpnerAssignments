@@ -4,8 +4,13 @@ const app = express();
 
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Basic Express Server");
+app.use("/welcome", (req, res, next) => {
+  req.user = "Guest";
+  next();
+});
+
+app.get("/welcome", (req, res) => {
+  res.send(`<h1> Welcome ${req.user} </h1>`);
 });
 
 app.listen(port, () => {
