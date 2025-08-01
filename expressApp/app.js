@@ -2,13 +2,13 @@ const express = require("express");
 
 const app = express();
 
-const fruitRoutes = require("./routes/fruits");
-const vegetableRoutes = require("./routes/vegetables");
+const animeRoutes = require("./routes/anime");
+const academicRoutes = require("./routes/academic");
 
 const port = 4000;
 
-app.use("/fruits", fruitRoutes.router);
-app.use("/vegetable", vegetableRoutes.router);
+app.use("/anime", animeRoutes.router);
+app.use("/academic", academicRoutes.router);
 
 app.listen(port, () => {
   console.log(
