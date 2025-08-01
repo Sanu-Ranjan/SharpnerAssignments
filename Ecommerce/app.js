@@ -2,18 +2,22 @@ const express = require("express");
 
 const app = express();
 
-const cartRoute = require("./routes/user").router;
+const userRoute = require("./routes/user").router;
 
 const productRoute = require("./routes/products").router;
 
+const cartRoute = require("./routes/cart").router;
+
 const port = 3000;
 
-app.use("/user", cartRoute);
+app.use("/user", userRoute);
 
 app.use("/products", productRoute);
 
+app.use("/cart", cartRoute);
+
 app.get("/", (req, res) => {
-  res.send(`<h1>Test Server</h1>`);
+  res.send(`<h1>Welcome!!!</h1>`);
 });
 
 app.listen(port, () => {
