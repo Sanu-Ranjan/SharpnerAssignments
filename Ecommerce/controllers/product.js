@@ -1,8 +1,10 @@
 const productServices = require("../services/productService");
 
+const path = require("path");
+
 const productList = (req, res) => {
   let productList = productServices.gettingAllProducts(); //sorted by price
-  res.json(productList);
+  res.sendFile(path.join(__dirname, "../views/products.html"));
 };
 
 const searchProduct = (req, res) => {
