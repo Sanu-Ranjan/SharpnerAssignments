@@ -29,9 +29,9 @@ const searchProduct = (productId) => {
   }
 };
 
-const addProduct = () => {
+const addProduct = (product) => {
   return {
-    message: "Adding a new Product",
+    product: product,
   };
 };
 

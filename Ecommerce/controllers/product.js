@@ -14,8 +14,9 @@ const searchProduct = (req, res) => {
 };
 
 const addProduct = (req, res) => {
-  let status = productServices.addProduct();
-  res.json(status);
+  let productData = productServices.addProduct(req.body.product);
+  console.log(productData);
+  res.json(productData);
 };
 
 module.exports.products = productList;

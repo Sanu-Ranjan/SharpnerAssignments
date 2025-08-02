@@ -10,6 +10,10 @@ const cartRoute = require("./routes/cart").router;
 
 const port = 3000;
 
+app.use(express.json());
+
+app.use(express.static("public"));
+
 app.use("/users", userRoute);
 
 app.use("/products", productRoute);
