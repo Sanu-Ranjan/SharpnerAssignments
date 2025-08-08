@@ -40,5 +40,26 @@ const findStudent = (req, res) => {
   });
 };
 
+const addStudent = (req, res) => {
+  const { name, email, age } = req.body;
+
+  const query = `INSERT INTO students (name, email, age) VALUES ( ? , ? , ?)`;
+
+  db.config.execute(query, [name, email, age], (err, result) => {
+    if (err) return dbErrorHandler(err, res);
+
+    res.status(201).json({
+      success: true,
+      data: {
+        name: name,
+        email: email,
+        age: age,
+      },
+      message: "Student added successfully",
+    });
+  });
+};
+
 module.exports.studentList = studentList;
 module.exports.findStudent = findStudent;
+module.exports.addStudent = addStudent;
