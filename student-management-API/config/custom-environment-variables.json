@@ -1,0 +1,8 @@
+{
+  "port": "PORT",
+  "portdb": "PORTDB",
+  "dbname": "DBNAME",
+  "dbpass": "DBPASS",
+  "dbhost": "DBHOST",
+  "dbuser": "DBUSER"
+}
