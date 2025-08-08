@@ -21,16 +21,6 @@ const addEntries = async (req, res) => {
       name: name,
     });
 
-    if (!student)
-      return res.status(404).json({
-        success: false,
-        error: "Database operation failed",
-        details: {
-          error: err,
-          message: err.message,
-        },
-      });
-
     res.status(201).json({
       success: true,
       data: {
