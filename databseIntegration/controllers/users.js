@@ -10,6 +10,14 @@ const dbErrorHandler = (err, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  const query = `SELECT * FROM users`;
+  db.connection.config.execute(query, (err, result) => {
+    if (err) return dbErrorHandler(err, res);
+    res.send(result);
+  });
+};
+
 const addEntries = (req, res) => {
   const { email, name } = req.body;
   const insertQuery = `INSERT INTO users (name,Email) VALUES(?,?)`;
@@ -116,3 +124,4 @@ const deleteEntries = (req, res) => {
 module.exports.addEntries = addEntries;
 module.exports.updateEntries = updateEntries;
 module.exports.deleteEntries = deleteEntries;
+module.exports.getAllUsers = getAllUsers;
