@@ -58,5 +58,35 @@ const updateEntries = async (req, res) => {
   }
 };
 
+const deleteEntries = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const students = await Student.destroy({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!students) {
+      return res.status(404).json({
+        success: false,
+        error: "No records found",
+        details: {
+          id: id,
+        },
+      });
+    }
+    res.status(200).json({
+      success: true,
+      data: students,
+      message: "Student record deletd Successfully",
+    });
+  } catch (error) {
+    dbErrorHandler(err, res);
+  }
+};
+
 module.exports.addEntries = addEntries;
 module.exports.updateEntries = updateEntries;
+module.exports.deleteEntries = deleteEntries;
