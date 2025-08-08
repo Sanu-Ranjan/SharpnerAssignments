@@ -60,6 +60,28 @@ const addStudent = (req, res) => {
   });
 };
 
+const updateDetails = (req, res) => {
+  const { id } = req.params;
+  const { name, email, age } = req.body;
+
+  const query = `UPDATE students SET name = ?, email = ?, age = ?  WHERE id = ?`;
+
+  db.config.execute(query, [name, email, age, id], (err, result) => {
+    if (err) return dbErrorHandler(err, res);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        name: name,
+        email: email,
+        age: age,
+      },
+      message: "Student details updated successfully",
+    });
+  });
+};
+
 module.exports.studentList = studentList;
 module.exports.findStudent = findStudent;
 module.exports.addStudent = addStudent;
+module.exports.updateDetails = updateDetails;

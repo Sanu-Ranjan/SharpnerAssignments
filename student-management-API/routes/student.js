@@ -2,6 +2,7 @@ const {
   studentList,
   findStudent,
   addStudent,
+  updateDetails,
 } = require("../controllers/student");
 
 const router = require("express").Router();
@@ -12,7 +13,7 @@ router.get("/:id", findStudent);
 
 router.post("/", addStudent);
 
-// router.put("/:id");
+router.put("/:id", updateDetails);
 
 // router.delete("/:id");
 
