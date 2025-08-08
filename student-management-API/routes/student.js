@@ -3,6 +3,7 @@ const {
   findStudent,
   addStudent,
   updateDetails,
+  deleteEntries,
 } = require("../controllers/student");
 
 const router = require("express").Router();
@@ -15,6 +16,6 @@ router.post("/", addStudent);
 
 router.put("/:id", updateDetails);
 
-// router.delete("/:id");
+router.delete("/:id", deleteEntries);
 
 module.exports.router = router;
