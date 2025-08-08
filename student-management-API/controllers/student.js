@@ -99,7 +99,7 @@ const deleteEntries = (req, res) => {
       return;
     }
 
-    res.send(200).json({
+    res.status(200).json({
       success: true,
       data: {
         id: id,
