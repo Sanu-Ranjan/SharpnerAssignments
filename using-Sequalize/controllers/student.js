@@ -23,10 +23,7 @@ const addEntries = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      data: {
-        email: email,
-        name: name,
-      },
+      data: student,
       message: "Student added succesfully",
     });
   } catch (err) {
@@ -37,6 +34,29 @@ const addEntries = async (req, res) => {
 const updateEntries = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
+
+  try {
+    let students = await Student.findByPk(id);
+    if (!students)
+      return res.status(404).json({
+        success: false,
+        error: "No records found",
+        details: {
+          id: id,
+        },
+      });
+
+    students.name = name;
+    await students.save();
+    res.status(200).json({
+      success: true,
+      data: students,
+      message: "Student details updated",
+    });
+  } catch (error) {
+    dbErrorHandler(error, res);
+  }
 };
 
 module.exports.addEntries = addEntries;
+module.exports.updateEntries = updateEntries;
