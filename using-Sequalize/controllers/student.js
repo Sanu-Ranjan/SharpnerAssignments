@@ -1,4 +1,6 @@
 const db = require("../config/dbConnection");
+const { Idcard } = require("../models");
+const { Department } = require("../models/department");
 
 const { Student } = require("../models/students");
 
@@ -15,15 +17,27 @@ const dbErrorHandler = (err, res) => {
 
 const addEntries = async (req, res) => {
   try {
-    const { email, name } = req.body;
+    const { email, name } = req.body.student;
+    const { number } = req.body.idCard;
+    const { depName } = req.body.department;
+
+    const department = await Department.create({
+      name: depName,
+    });
     const student = await Student.create({
       email: email,
       name: name,
+      DepartmentId: department.id,
+    });
+
+    const idCard = await Idcard.create({
+      number: number,
+      StudentId: student.id,
     });
 
     res.status(201).json({
       success: true,
-      data: student,
+      data: { student, idCard, department },
       message: "Student added succesfully",
     });
   } catch (err) {

@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use("/students", studentRouter.router);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(port, () => {
     console.log(`Listening on port:${port}`);
   });
