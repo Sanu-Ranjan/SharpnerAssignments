@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Stack User Management Assignment</title>
+  </head>
+  <body>
+    <h1>User Management</h1>
+
+    <form id="userForm">
+      <input type="text" name="name" placeholder="Enter Name" required />
+      <input type="email" name="email" placeholder="Enter Email" required />
+      <input type="text" name="phone" placeholder="Enter Phone" required />
+      <button type="submit">Add User</button>
+    </form>
+
+    <h3 id="totalUsers">Total Users: 0</h3>
+
+    <table id="dataTable" border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
