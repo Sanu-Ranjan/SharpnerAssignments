@@ -1,6 +1,5 @@
 const express = require("express");
 const { sequelize } = require("./config/dbConnection");
-const { Sequelize, DataTypes } = require("sequelize");
 const app = express();
 const studentRouter = require("./routes/student");
 require("./models/students");
