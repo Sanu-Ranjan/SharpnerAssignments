@@ -1,4 +1,4 @@
-const BACKEND = "https://localhost:3000/user";
+const BACKEND = "http://localhost:3000/users";
 
 const form = document.getElementById("userForm");
 const tableBody = document.querySelector("#dataTable tbody");
@@ -7,8 +7,8 @@ const totalUsersEl = document.getElementById("totalUsers");
 async function fetchUsers() {
   try {
     const res = await axios.get(BACKEND);
-    const users = res.data;
-
+    const users = res.data.data;
+    console.log(users);
     tableBody.innerHTML = "";
     users.forEach((user) => {
       const tr = document.createElement("tr");
@@ -16,7 +16,7 @@ async function fetchUsers() {
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>${user.phone}</td>
-        <td><button onclick="deleteUser('${user._id}')">Delete</button></td>
+        <td><button onclick="deleteUser('${user.id}')">Delete</button></td>
       `;
       tableBody.appendChild(tr);
     });
