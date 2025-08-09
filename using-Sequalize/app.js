@@ -2,7 +2,7 @@ const express = require("express");
 const { sequelize } = require("./config/dbConnection");
 const app = express();
 const studentRouter = require("./routes/student");
-require("./models/students");
+require("./models");
 
 const port = process.env.PORT || 3000;
 
