@@ -9,15 +9,16 @@
     <h1>Expense Tracker</h1>
     <form id="expenseForm">
       <label>
-        Enter Expense Amount: <input id="amount" type="text" required />
+        Enter Expense Amount:
+        <input id="amount" name="amount" type="text" required />
       </label>
       <label>
-        Enter Description: <input id="description" type="text" /
-        required></label
+        Enter Description: <input id="description" name="description"
+        type="text" / required></label
       >
       <label
         >Choose Category:
-        <select id="category">
+        <select id="category" name="category">
           <option value="Food">Food</option>
           <option value="Rent">Rent</option>
           <option value="Pet">Pet Expense</option>

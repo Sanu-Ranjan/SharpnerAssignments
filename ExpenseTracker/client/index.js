@@ -28,6 +28,27 @@ const loadExpenseList = async () => {
   }
 };
 
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const expense = new Expense(
+    formData.get("amount"),
+    formData.get("description"),
+    formData.get("category")
+  );
+  console.log(expense);
+  try {
+    await axios.post(`${BACKEND}/expenses`, {
+      amount: expense.amount,
+      description: expense.description,
+      category: expense.category,
+    });
+    loadExpenseList();
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 const deleteExpense = async (expenseId, btn) => {
   try {
     await axios.delete(`${BACKEND}/expenses/${expenseId}`);
