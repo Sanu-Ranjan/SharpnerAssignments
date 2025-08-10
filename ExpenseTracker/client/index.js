@@ -1,5 +1,3 @@
-//handling form submission
-
 const BACKEND = "http://localhost:3000";
 
 class Expense {
@@ -22,7 +20,7 @@ const loadExpenseList = async () => {
 
     data.forEach((e) => {
       const li = document.createElement("li");
-      li.innerHTML = `Amount:${e.amount} Category:${e.category} Description:${e.description} <button onclick = "deleteExpense(${e.id})" >Delete</button> <button onclick = "edit(${e.id})" >Edit</button>`;
+      li.innerHTML = `Amount:${e.amount} Category:${e.category} Description:${e.description} <button onclick = "deleteExpense(${e.id},this)" >Delete</button> <button onclick = "edit(${e.id},this)" >Edit</button>`;
       list.appendChild(li);
     });
   } catch (error) {
@@ -30,10 +28,10 @@ const loadExpenseList = async () => {
   }
 };
 
-const deleteExpense = async (expenseId) => {
+const deleteExpense = async (expenseId, btn) => {
   try {
     await axios.delete(`${BACKEND}/expenses/${expenseId}`);
-    loadExpenseList();
+    btn.parentElement.remove();
   } catch (error) {
     console.log(error.message);
   }
