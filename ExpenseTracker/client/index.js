@@ -1,4 +1,7 @@
 //handling form submission
+
+const BACKEND = "http://localhost:3000";
+
 class Expense {
   constructor(amt, description, category) {
     this.amount = amt;
@@ -7,39 +10,33 @@ class Expense {
   }
 }
 
-document.getElementById("expenseForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  let entry = new Expense(
-    event.target.amount.value,
-    event.target.description.value,
-    event.target.category.value
-  );
+const list = document.getElementById("entries");
+const form = document.getElementById("expenseForm");
 
-  let listItem = document.createElement("li");
-  listItem.className = "expenseList";
-  listItem.textContent = ` ${entry.amount} - ${entry.category} - ${entry.description} `;
+const loadExpenseList = async () => {
+  list.innerHTML = ``;
+  try {
+    const {
+      data: { data },
+    } = await axios.get(`${BACKEND}/expenses`);
 
-  let deleteBtn = document.createElement("button");
-  deleteBtn.className = "deleteEntry";
-  deleteBtn.textContent = "Delete Entry";
-
-  let editBtn = document.createElement("button");
-  editBtn.className = "editEntry";
-  editBtn.textContent = "Edit Expense";
-
-  listItem.appendChild(deleteBtn);
-  listItem.appendChild(editBtn);
-
-  document.getElementById("entries").append(listItem);
-});
-
-document.getElementById("entries").addEventListener("click", (event) => {
-  if (event.target.className == "editEntry") {
-    let info = event.target.parentElement.firstChild.textContent.split("-");
-
-    document.getElementById("amount").value = info[0];
-    document.getElementById("description").value = info[2];
-    document.getElementById("category").value = info[1].trim();
+    data.forEach((e) => {
+      const li = document.createElement("li");
+      li.innerHTML = `Amount:${e.amount} Category:${e.category} Description:${e.description} <button onclick = "deleteExpense(${e.id})" >Delete</button> <button onclick = "edit(${e.id})" >Edit</button>`;
+      list.appendChild(li);
+    });
+  } catch (error) {
+    console.log(error.message);
   }
-  event.target.parentElement.remove();
-});
+};
+
+const deleteExpense = async (expenseId) => {
+  try {
+    await axios.delete(`${BACKEND}/expenses/${expenseId}`);
+    loadExpenseList();
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+loadExpenseList();

@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/expenses", expenseRouter.router);
 
-db.sync({ force: true }).then(() => {
+db.sync({ force: false }).then(() => {
   app.listen(port, () => {
     console.log(`Listening on port:${port}`);
   });
