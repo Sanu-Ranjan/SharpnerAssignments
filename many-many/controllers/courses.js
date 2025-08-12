@@ -1,4 +1,4 @@
-const { Courses } = require("../models");
+const { Courses, Students } = require("../models");
 const { dbErrorHandler, validateCourse, resObject } = require("../utils");
 
 //getCourse
@@ -70,9 +70,40 @@ const deleteCourse = async (req, res) => {
   }
 };
 
+const addCourseStudent = async (req, res) => {
+  const { studentId, coursesIds } = req.body;
+
+  try {
+    const student = await Students.findByPk(studentId);
+    if (!student)
+      return res
+        .status(200)
+        .json(resObject.fail("Student not found", { at_id: studentId }));
+
+    const courses = await Courses.findAll({
+      where: {
+        id: coursesIds,
+      },
+    });
+
+    await student.addCourses(courses);
+
+    const updatedStudents = await Students.findByPk(studentId, {
+      include: Courses,
+    });
+
+    res
+      .status(200)
+      .json(resObject.success("updated students", updatedStudents));
+  } catch (error) {
+    dbErrorHandler(error, res);
+  }
+};
+
 module.exports = {
   getCourse,
   addCourse,
   updateCourse,
   deleteCourse,
+  addCourseStudent,
 };
