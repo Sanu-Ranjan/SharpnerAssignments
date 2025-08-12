@@ -2,7 +2,9 @@ const { dbconnect } = require("../config/dbconnect");
 
 const { DataTypes } = require("sequelize");
 
-const Coures = dbconnect.define("Courses", {
+const Joi = require("joi");
+
+const Courses = dbconnect.define("Courses", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -17,4 +19,6 @@ const Coures = dbconnect.define("Courses", {
   },
 });
 
-module.exports.Courses = Coures;
+module.exports = {
+  Courses,
+};

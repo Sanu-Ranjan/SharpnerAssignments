@@ -1,6 +1,6 @@
-const { Students, validate } = require("../models/students");
+const { Students } = require("../models");
 
-const { dbErrorHandler, resObject } = require("../utils/index");
+const { dbErrorHandler, resObject, validateStudent } = require("../utils");
 
 const Joi = require("joi");
 
@@ -18,7 +18,7 @@ const get = async (req, res) => {
 //add
 
 const add = async (req, res) => {
-  const { error, value } = validate(req.body);
+  const { error, value } = validateStudent(req.body);
 
   if (error) {
     return res.status(400).json(resObject.fail("Invalid Data", error));
@@ -40,7 +40,7 @@ const update = async (req, res) => {
 
   if (er) return res.status(400).json(resObject.fail("Invalid Params", er));
 
-  const { error, value } = validate(req.body);
+  const { error, value } = validateStudent(req.body);
 
   if (error) return res.status(400).json(resObject.fail("Invalid Data", error));
 
