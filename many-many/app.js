@@ -13,7 +13,7 @@ app.use("/students", student.router);
 //courses route
 //studentCourses route
 
-dbconnect.sync({ force: true }).then(() => {
+dbconnect.sync({ force: false }).then(() => {
   app.listen(port, () => {
     console.log(`listeling on port:${port}`);
   });
