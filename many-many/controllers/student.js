@@ -45,7 +45,6 @@ const update = async (req, res) => {
   if (error) return res.status(400).json(resObject.fail("Invalid Data", error));
 
   try {
-    // res.send(value);
     const student = await Students.update(value, {
       where: {
         id: id,
@@ -63,9 +62,35 @@ const update = async (req, res) => {
   }
 };
 //delete
+const del = async (req, res) => {
+  const { error, value } = Joi.number().required().validate(req.params.id);
 
+  if (error) return res.status(400).json(resObject.fail("Invalid data", error));
+
+  try {
+    const student = await Students.destroy({
+      where: {
+        id: value,
+      },
+    });
+
+    if (!student)
+      return res
+        .status(404)
+        .json(resObject.fail("No records found", { id: value }));
+
+    res
+      .status(200)
+      .json(
+        resObject.success("Student record deleted", { rowsEffected: student })
+      );
+  } catch (error) {
+    dbErrorHandler(error, res);
+  }
+};
 module.exports = {
   get,
   add,
   update,
+  del,
 };
