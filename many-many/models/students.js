@@ -2,6 +2,8 @@ const { dbconnect } = require("../config/dbconnect");
 
 const { DataTypes } = require("sequelize");
 
+const Joi = require("joi");
+
 const Students = dbconnect.define("Students", {
   id: {
     type: DataTypes.INTEGER,
@@ -15,4 +17,15 @@ const Students = dbconnect.define("Students", {
   },
 });
 
-module.exports.Students = Students;
+const schema = Joi.object({
+  name: Joi.string().min(3).max(30).required(),
+});
+
+function validate(data) {
+  return schema.validate(data);
+}
+
+module.exports = {
+  Students,
+  validate,
+};
