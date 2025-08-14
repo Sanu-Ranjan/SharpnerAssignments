@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 const blogRouter = require("./router/blogs");
 const commentRouter = require("./router/comments");
-
+const cors = require("cors");
 const port = process.env.PORT || 3000;
 const { dbconnect } = require("./config/dbConnect");
 
 require("./models");
-
+app.use(cors());
 app.use(express.json());
 
 app.use("/blogs", blogRouter.router);
