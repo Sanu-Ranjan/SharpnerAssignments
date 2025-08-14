@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs Assignment</title>
+  </head>
+  <body>
+    <h1>Hi there !!!</h1>
+    <form id="blogForm">
+      <label>
+        Blog title:
+        <input id="title" name="title" type="text" required />
+      </label>
+      <br />
+      <br />
+      <label>
+        Blog Author: <input id="author" name="aothor" type="text" /
+        required></label
+      >
+      <br />
+      <br />
+      <label
+        >Blog Content: <input type="text" name="content" id="content" />
+      </label>
+      <button id="addBlog" type="submit">Submit</button>
+    </form>
+    <br />
+    <br />
+    <h2>Blogs:</h2>
+    <div id="entries"></div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="./index.js"></script>
+  </body>
+</html>
