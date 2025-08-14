@@ -4,11 +4,11 @@ const { DataTypes } = require("sequelize");
 
 const Comments = dbconnect.define("Comments", {
   id: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  comment: {
+  comm: {
     type: DataTypes.TEXT("medium"),
     allowNull: false,
   },
