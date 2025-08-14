@@ -17,7 +17,7 @@ let Blogs = dbconnect.define("Blogs", {
     allowNull: false,
   },
   content: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT("long"),
     allowNull: false,
   },
 });
