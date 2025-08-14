@@ -1,22 +1,19 @@
 const { dbconnect } = require("../config/dbconnect");
-
 const { DataTypes } = require("sequelize");
 
-const Courses = dbconnect.define("Courses", {
+const Idcard = dbconnect.define("idcards", {
   id: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
     autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
   },
-  course: {
-    type: DataTypes.STRING,
+  IdNumber: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,
     unique: true,
   },
 });
 
 module.exports = {
-  Courses,
+  Idcard,
 };
