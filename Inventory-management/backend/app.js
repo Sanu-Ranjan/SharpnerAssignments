@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const { database } = require("./database/db");
 require("./models");
 const inventory = require("./routes/inventory");
 const category = require("./routes/category");
+
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/inventory", inventory.router);
